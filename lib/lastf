@@ -36,7 +36,7 @@ end
 
 opt_parser.parse(ARGV)
 
-command = "ls -lt | awk '{print $9}' | grep #{options.search_term} | head -#{options.last}"
+command = "ls -lt | tail +2 | awk '{print $9}' | grep #{options.search_term} | head -#{options.last}"
 
 begin
   `#{command}`.split("\n")[0 .. -1].each do |str|
