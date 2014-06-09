@@ -9,7 +9,7 @@ require 'pp'
 
 
 options = OpenStruct.new
-options[:last] = 1
+options[:num] = 0
 options[:search_term] = "\"\""
 
 opt_parser = OptionParser.new do |opts|
@@ -18,9 +18,9 @@ opt_parser = OptionParser.new do |opts|
   opts.separator ""
   opts.separator "Specific options:"
 
-  opts.on("-l", "--last [last NUMBER]",
-          "Number of history commands to search through.") do |last|
-    options.last = last.to_i
+  opts.on("-n", "--N [NUMBER]",
+          "Number of history commands to search through.") do |num|
+    options.num = last.to_i
   end
 
   opts.on("-s", "--search [SEARCH TERM]",
@@ -36,7 +36,13 @@ end
 
 opt_parser.parse(ARGV)
 
-command = "cat ~/.zhistory | tail -#{options.last + 1} | grep #{options.search_term}"
+history_part = "cat ~/.zhistory"
+tail_part = " | tail -#{options.num + 1}"
+grep_part = " | grep #{options.search_term}"
+
+history_part << tail_part if options.num > 0
+
+command = history_part + grep_part
 
 `#{command}`.split("\n")[0 .. -2].each do |str|
   puts str.split(";")[-1]
