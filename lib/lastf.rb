@@ -27,7 +27,7 @@ opt_parser = OptionParser.new do |opts|
           "Search term.") do |search_term|
     options.search_term = search_term
   end
-
+  
   opts.on("-h", "--help", "Show this message") do
     puts opts
     exit
@@ -36,7 +36,11 @@ end
 
 opt_parser.parse(ARGV)
 
-command = "ls -lt | tail +2 | awk '{print $9}' | grep #{options.search_term} | head -#{options.last}"
+awk_part = "awk '{ s = \"\"; for (i = 9; i <= NF; i++) s = s $i \" \" ; print s }'"
+
+command = "ls -lt | tail +2 | #{awk_part} | grep #{options.search_term} | head -#{options.last}"
+
+# puts command
 
 begin
   `#{command}`.split("\n")[0 .. -1].each do |str|
