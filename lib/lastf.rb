@@ -38,6 +38,8 @@ opt_parser.parse(ARGV)
 
 awk_part = "awk '{ s = \"\"; for (i = 9; i <= NF; i++) s = s $i \" \" ; print s }'"
 
+dir_part = options.search_term.split('/')[0..-2]
+puts dir_part
 command = "ls -lt | tail +2 | #{awk_part} | grep #{options.search_term} | head -#{options.last}"
 
 # puts command
