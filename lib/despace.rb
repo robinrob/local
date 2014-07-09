@@ -38,6 +38,8 @@ command = "ls *\" \"* | tail +1 | grep #{options.pattern}"
 files = `#{command}`.to_s.split("\n")
 
 files.each do |filename|
-  newfile = filename.gsub(" ", "-").gsub("(", "-").gsub(")", "-")
-  system("mv -i \"#{filename}\" #{newfile}")
+  if /\ /.match(filename) and !File.directory?(filename)
+    newfile = filename.gsub(" ", "-").gsub("(", "-").gsub(")", "-")
+    system("mv -i \"#{filename}\" #{newfile}")
+  end
 end
