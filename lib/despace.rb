@@ -32,11 +32,12 @@ opt_parser.parse(ARGV)
 
 awk_part = "awk '{ s = \"\"; for (i = 9; i <= NF; i++) s = s $i \" \" ; print s }'"
 
+# NEED TO CHANGE THIS TO A FIND COMMAND - LEARN HOW TO USE FIND!
 command = "ls *\" \"* | tail +1 | grep #{options.pattern}"
 
 files = `#{command}`.to_s.split("\n")
 
-files.each do |file|
-  newfile = file.split(" ").join("_")
-  system("mv -i \"#{file}\" #{newfile}")
+files.each do |filename|
+  newfile = filename.gsub(" ", "-").gsub("(", ".").gsub(")", ".")
+  system("mv -i \"#{filename}\" #{newfile}")
 end
