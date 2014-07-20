@@ -10,7 +10,7 @@ require 'pp'
 APPNAME = "lastf"
 
 options = OpenStruct.new
-options[:pattern] = "."
+options[:pattern] = ENV['HOSTNAME']
 
 opt_parser = OptionParser.new do |opts|
   opts.banner = "Usage: #{APPNAME} [options]"
