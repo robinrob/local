@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# `lastf`` displays the N last-modified files matching the specified search-term.
+# `numf`` displays the N num-modified files matching the specified search-term.
 
 require 'optparse'
 require 'optparse/time'
@@ -10,7 +10,7 @@ require 'colorize'
 
 
 options = OpenStruct.new
-options[:last] = 1
+options[:num] = 1
 options[:search_term] = "\"\""
 options[:name] = "screenshot"
 options[:directory] = "moved_screenshots"
@@ -21,9 +21,9 @@ opt_parser = OptionParser.new do |opts|
   opts.separator ""
   opts.separator "Specific options:"
 
-  opts.on("-l", "--last [NUMBER]",
-          "Number of latest files.") do |last|
-    options.last = last.to_i
+  opts.on("-n", "--num [NUMBER]",
+          "Number of latest files.") do |num|
+    options.num = num.to_i
   end
 
   opts.on("-s", "--search [SEARCH TERM]",
@@ -50,7 +50,7 @@ end
 opt_parser.parse(ARGV)
 
 screenshot_name = ENV['SCREENSHOT_NAME']
-filenames = `lastf -l #{options.last} -s #{screenshot_name}`.split(/\ \n/)
+filenames = `lastf -n #{options.num} -s #{screenshot_name}`.split(/\ \n/)
 
 `mkdir -p #{options.directory}`
 

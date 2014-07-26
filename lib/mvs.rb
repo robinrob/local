@@ -50,7 +50,7 @@ end
 opt_parser.parse(ARGV)
 
 screenshot_name = ENV['SCREENSHOT_NAME']
-filenames = `numf -l #{options.num} -s #{screenshot_name}`.split(/\ \n/)
+filenames = `lastf -n #{options.num} -s #{screenshot_name}`.split(/\ \n/)
 
 `mkdir -p #{options.directory}`
 
