@@ -3,7 +3,7 @@
 require 'colorize'
 
 outfile = "postgres.pdf"
-outpath = "#{ENV['DOCUMENTS_HOME']}/#{outfile}"
+outpath = "#{ENV['DOCS_HOME']}/#{outfile}"
 outpath_escaped = outpath.gsub(/ /){ "\\ " }
 
 if !File.file?("#{outpath}")
