@@ -20,7 +20,7 @@ opt_parser = OptionParser.new do |opts|
 
   opts.on("-n", "--N [NUMBER]",
           "Number of history commands to search through.") do |num|
-    options.num = last.to_i
+    options.num = num.to_i
   end
 
   opts.on("-s", "--search [SEARCH TERM]",
