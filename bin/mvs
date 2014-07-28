@@ -11,7 +11,7 @@ require 'colorize'
 
 options = OpenStruct.new
 options[:num] = 1
-options[:search_term] = "\"\""
+options[:search_term] = ENV['SCREENSHOT_NAME']
 options[:name] = "screenshot"
 options[:directory] = "moved_screenshots"
 
@@ -31,11 +31,6 @@ opt_parser = OptionParser.new do |opts|
     options.search_term = search_term
   end
   
-  opts.on("-n", "--name [NAME]",
-          "Directory to move to") do |name|
-    options.name = name
-  end
-  
   opts.on("-d", "--directory [DIRECTORY]",
           "Directory to move to") do |dir|
     options.directory = dir
@@ -49,13 +44,12 @@ end
 
 opt_parser.parse(ARGV)
 
-screenshot_name = ENV['SCREENSHOT_NAME']
-filenames = `lastf -n #{options.num} -s #{screenshot_name}`.split(/\ \n/)
-
 `mkdir -p #{options.directory}`
 
+filenames = `lastf -n #{options.num} -s #{options.search_term}`.split(/\ \n/)
+
 filenames.each_with_index do |filename, i|
-  command = "mv '#{filename}' #{options.directory}/#{options.name}_#{i+1}".green
-  puts command
-  `mv '#{filename}' #{options.directory}/#{options.name}_#{i+1}.png`
+  command = "cp '#{filename}' #{options.directory}/#{options.directory}_#{i+1}.png"
+  puts command.green
+  `#{command}`
 end

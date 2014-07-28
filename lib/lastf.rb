@@ -42,11 +42,11 @@ dir_part = options.search_term.split('/')[0..-2]
 puts dir_part
 command = "ls -lt | tail +2 | #{awk_part} | grep #{options.search_term} | head -#{options.num}"
 
-puts command
 
 begin
   `#{command}`.split("\n")[0 .. -1].each do |str|
-    puts str.split(";")[-1]
+    # puts str.split(";")[-1]
+    puts str
   end
 
 rescue StandardError => e
