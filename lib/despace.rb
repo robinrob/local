@@ -43,7 +43,7 @@ command = "find . -name '#{options.pattern}' -type #{options.type} -depth 1"
 # puts command.green
 files = `#{command}`.to_s.split("\n")
 
-puts "files: #{files}"
+# puts "files: #{files}"
 
 files.each do |filename|
   if /\ /.match(filename)
