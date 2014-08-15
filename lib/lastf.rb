@@ -27,11 +27,6 @@ opt_parser = OptionParser.new do |opts|
           "Search term.") do |search_term|
     options.search_term = search_term
   end
-  
-  opts.on("-h", "--help", "Show this message") do
-    puts opts
-    exit
-  end
 end
 
 opt_parser.parse(ARGV)
