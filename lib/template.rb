@@ -16,7 +16,7 @@ options[:pattern] = "*"
 opt_parser = OptionParser.new do |opts|
   opts.banner = "Usage: #{APPNAME} [options]"
 
-  opts.separator "Specific options:"
+  opts.separator "\nSpecific options:"
 
   opts.on("-p", "--pattern [PATTERN]",
           "Pattern to de-space.") do |pattern|

@@ -7,21 +7,17 @@ require 'optparse/time'
 require 'ostruct'
 require 'pp'
 require 'colorize'
+require 'date'
 
-APPNAME = "lastf"
+APPNAME = "nofap"
 
 options = OpenStruct.new
 options[:pattern] = "*"
 
 opt_parser = OptionParser.new do |opts|
-  opts.banner = "Usage: #{APPNAME} [options]"
+  opts.banner = "Usage: #{APPNAME}"
 
-  opts.separator "Specific options:"
-
-  opts.on("-p", "--pattern [PATTERN]",
-          "Pattern to de-space.") do |pattern|
-    options.pattern = pattern
-  end
+  opts.separator "\nSpecific options:"
 
   opts.on("-h", "--help", "Show this message") do
     puts opts
@@ -31,9 +27,10 @@ end
 
 opt_parser.parse(ARGV)
 
-require 'date'
-require 'date_mixin'
-require 'lib/log'
 
+start = Date.new(2015, 10, 27)
+today = Date.today()
 
-Log.put "Date.new(2001,2,3)"
+gap = (today - start).to_i
+
+puts gap
