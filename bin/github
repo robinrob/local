@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+github=$RUBY_HOME/projects/github
+
+source $github/creds.sh
+$github/import.rb
