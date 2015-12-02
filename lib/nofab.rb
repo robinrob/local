@@ -28,9 +28,26 @@ end
 opt_parser.parse(ARGV)
 
 
-start = Date.new(2015, 10, 27)
+date_str = `cat ~/.nofaprc`
+
+start = Date.strptime(date_str, '%Y-%m-%d')
 today = Date.today()
 
 gap = (today - start).to_i
+weeks = gap / 7
 
-puts gap
+
+if weeks < 1
+then
+  col = :red
+elsif weeks < 2
+  col = :yellow
+elsif weeks < 3
+  col = :green
+elsif weeks < 4
+  col = :blue
+elsif weeks < 13
+  col = :light_white
+end
+
+puts gap.to_s.send(col)
