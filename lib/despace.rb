@@ -47,7 +47,15 @@ files = `#{command}`.to_s.split("\n")
 
 files.each do |filename|
   if /\ /.match(filename)
-    newfile = filename.gsub(" ", "-").gsub("(", "-").gsub(")", "-")
+    newfile = filename
+    ['    ', '   ', '  '].each do |pattern|
+      newfile = newfile.gsub(pattern, ' ')
+    end
+
+    [' - ', ' ', '(', ')'].each do |pattern|
+      newfile = newfile.gsub(pattern, '-')
+    end
+
     command = "mv -i \"#{filename}\" #{newfile}"
     puts command.green
     system(command)
