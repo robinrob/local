@@ -28,7 +28,7 @@ end
 opt_parser.parse(ARGV)
 
 
-date_str = `cat ~/.nofaprc`
+date_str = `cat ~/.pafonrc`
 
 start = Date.strptime(date_str, '%Y-%m-%d')
 today = Date.today()
