@@ -9,7 +9,7 @@ require 'pp'
 require 'colorize'
 require 'date'
 
-APPNAME = "nofap"
+APPNAME = "pafon_counter"
 
 options = OpenStruct.new
 options[:pattern] = "*"
